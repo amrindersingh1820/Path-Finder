@@ -1,4 +1,4 @@
-### 🌐 GraphNav: Shortest Path Finder
+### 🌐 PathFinder: Shortest Path Finder
 
 A high-performance Flask web application designed to calculate and visualize optimal routes between nodes. This project combines efficient graph algorithms (BFS & Dijkstra) with a premium Cyber-Glassmorphism user interface.
 
