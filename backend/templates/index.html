@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neural Pathfinder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS & JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+</head>
+<body>
+
+    <div class="bg-animation"></div>
+
+    <div class="main-container">
+
+        <!-- LEFT SIDEBAR -->
+        <div class="glass-panel sidebar">
+            <h1 class="logo">Pathfinder</h1>
+
+            <!-- Add Edge -->
+            <div class="control-group">
+                <h3><i class="fa-solid fa-circle-nodes"></i> Add Connection</h3>
+                <div class="input-row">
+                    <input type="text" id="node1" placeholder="Source (A)" maxlength="4">
+                    <input type="text" id="node2" placeholder="Target (B)" maxlength="4">
+                </div>
+                <input type="number" id="weight" placeholder="Weight (Cost)">
+                <button onclick="addEdge()" class="btn-neon">
+                    <i class="fa-solid fa-plus"></i> Add Edge
+                </button>
+            </div>
+
+            <!-- Find Path -->
+            <div class="control-group">
+                <h3><i class="fa-solid fa-location-crosshairs"></i> Find Path</h3>
+                <div class="input-row">
+                    <input type="text" id="startNode" placeholder="Start Node">
+                    <input type="text" id="endNode" placeholder="End Node">
+                </div>
+                <select id="algoMethod">
+                    <option value="dijkstra">Dijkstra (Weighted)</option>
+                    <option value="bfs">BFS (Unweighted)</option>
+                </select>
+                <button onclick="findPath()" class="btn-neon btn-accent">
+                    <i class="fa-solid fa-play"></i> Visualize Path
+                </button>
+            </div>
+
+            <!-- NEW: Database Management Button -->
+            <button onclick="openDbModal()" class="btn-neon btn-warning" style="margin-top: auto;">
+                <i class="fa-solid fa-database"></i> Manage Database
+            </button>
+
+            <!-- Stats -->
+            <div id="statsPanel" class="stats-box hidden">
+                <div class="stat-item">
+                    <span class="label">Total Cost</span>
+                    <span class="value" id="costVal">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">Nodes Visited</span>
+                    <span class="value" id="visitedVal">0</span>
+                </div>
+                <div class="path-display" id="pathStr"></div>
+            </div>
+        </div>
+
+        <!-- RIGHT VISUALIZER -->
+        <div class="glass-panel visualizer">
+            <div id="mynetwork"></div>
+
+            <div class="legend">
+                <div><span class="dot normal"></span>Node</div>
+                <div><span class="dot scanning"></span>Scanning</div>
+                <div><span class="dot path"></span>Result Path</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DATABASE MODAL -->
+    <div id="dbModal" class="modal hidden">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-server"></i> Data Management</h2>
+                <button onclick="closeDbModal()" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="db-controls">
+                <button onclick="clearDatabase()" class="btn-neon btn-danger">
+                    <i class="fa-solid fa-trash-can"></i> Reset All Data
+                </button>
+            </div>
+
+            <div class="table-container">
+                <table id="dbTable">
+                    <thead>
+                        <tr>
+                            <th>Source</th>
+                            <th>Target</th>
+                            <th>Weight</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+A</html>

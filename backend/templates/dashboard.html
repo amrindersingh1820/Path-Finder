@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-Theme Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="theme-light">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2 class="logo">My App</h2>
+
+    <a class="active">Dashboard</a>
+    <a>Database</a>
+    <a>Analytics</a>
+    <a>Settings</a>
+
+    <hr>
+
+    <h4 style="color:#aaa; padding-left: 25px;">Themes</h4>
+    <button class="theme-btn light" onclick="setTheme('theme-light')">Light</button>
+    <button class="theme-btn dark" onclick="setTheme('theme-dark')">Dark</button>
+    <button class="theme-btn gradient" onclick="setTheme('theme-gradient')">Gradient</button>
+    <button class="theme-btn neon" onclick="setTheme('theme-neon')">Neon</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+    <div class="header">
+        <h2>Dashboard Overview</h2>
+    </div>
+
+    <div class="row m-3">
+
+        <div class="col-md-4">
+            <div class="card-box">
+                <h3>Total Users</h3>
+                <p>{{ total_users }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card-box">
+                <h3>Records</h3>
+                <p>{{ record_count }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card-box">
+                <h3>Server Status</h3>
+                <p>Online ✔</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container mt-4">
+        <canvas id="myChart" height="120"></canvas>
+    </div>
+</div>
+
+<!-- THEME SWITCH SCRIPT -->
+<script>
+function setTheme(themeName) {
+    document.body.className = themeName;
+}
+
+// Chart Example
+const ctx = document.getElementById('myChart');
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+        datasets: [{
+            label: 'Activity',
+            data: [4, 8, 6, 10, 12],
+            borderWidth: 3
+        }]
+    }
+});
+</script>
+
+</body>
+</html>

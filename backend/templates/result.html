@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Result - Shortest Path</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <h1>📍 Shortest Path Result</h1>
+  {% if path %}
+    <p><strong>Path:</strong> {{ path }}</p>
+    <p><strong>Cost:</strong> {{ cost }}</p>
+  {% else %}
+    <p>No valid path found.</p>
+  {% endif %}
+  <a href="/">⬅ Back to Home</a>
+</body>
+</html>
